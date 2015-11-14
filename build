@@ -1,0 +1,5 @@
+#!/bin/bash
+./node_modules/.bin/preprocess src/grammar.jison ./src > src/grammar.full.jison &&\
+./node_modules/.bin/jison src/grammar.full.jison -o src/index.js && \
+rm src/grammar.full.jison && \
+echo "Parser build successful."

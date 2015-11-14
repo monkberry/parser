@@ -1,0 +1,29 @@
+{
+  "name": "monkberry-parser",
+  "version": "1.0.0",
+  "description": "Monkberry Parser",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "./build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/monkberry/parser.git"
+  },
+  "keywords": [
+    "monkberry",
+    "parser"
+  ],
+  "author": "Anton Medvedev <anton@medv.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/monkberry/parser/issues"
+  },
+  "homepage": "https://github.com/monkberry/parser#readme",
+  "devDependencies": {
+    "asciitree": "^1.0.0",
+    "jison": "^0.4.15",
+    "preprocessor": "^1.4.0"
+  }
+}
