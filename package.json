@@ -1,6 +1,6 @@
 {
   "name": "monkberry-parser",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Monkberry Parser",
   "main": "src/index.js",
   "scripts": {
