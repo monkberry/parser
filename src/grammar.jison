@@ -63,6 +63,7 @@ AttributeText [^\"{]+
 <html>([\w-]+)                     return "IDENTIFIER";
 <html>\s+                          /* skip whitespaces */
 <html>"="                          return "=";
+<html>"{{"                         this.begin("expr"); return "{{";
 <html>(\")                         this.begin("attr"); return "QUOTE";
 <html>"/"                          return "/";
 
@@ -294,6 +295,10 @@ Attribute
     : IDENTIFIER
         {
             $$ = new AttributeNode($1, null, createSourceLocation(@1, @1));
+        }
+    | IDENTIFIER "=" ExpressionStatement
+        {
+            $$ = new AttributeNode($1, [$3], createSourceLocation(@1, @3));
         }
     | IDENTIFIER "=" QUOTE AttributeValue QUOTE
         {
