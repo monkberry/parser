@@ -144,6 +144,7 @@ AttributeText [^\"{]+
 <expr>"^="                         return "^=";
 <expr>"^"                          return "^";
 <expr>"~"                          return "~";
+<expr>"..."                        return "...";
 
 <<EOF>>                            return "EOF";
 
@@ -303,6 +304,10 @@ Attribute
     | IDENTIFIER "=" QUOTE AttributeValue QUOTE
         {
             $$ = new AttributeNode($1, $4, createSourceLocation(@1, @5));
+        }
+    | "{{" "..." IdentifierName "}}"
+        {
+            $$ = new SpreadAttributeNode($3, createSourceLocation(@1, @4));
         }
     ;
 

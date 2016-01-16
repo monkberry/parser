@@ -75,6 +75,12 @@ function AttributeNode(name, body, loc) {
   this.loc = loc;
 }
 
+function SpreadAttributeNode(identifier, loc) {
+  this.type = "SpreadAttribute";
+  this.identifier = identifier;
+  this.loc = loc;
+}
+
 function ExpressionStatementNode(expression, loc) {
   this.type = 'ExpressionStatement';
   this.expression = expression;
@@ -220,6 +226,7 @@ parser.ast.DocumentNode = DocumentNode;
 parser.ast.TextNode = TextNode;
 parser.ast.ElementNode = ElementNode;
 parser.ast.AttributeNode = AttributeNode;
+parser.ast.SpreadAttributeNode = SpreadAttributeNode;
 parser.ast.ExpressionStatementNode = ExpressionStatementNode;
 parser.ast.IfStatementNode = IfStatementNode;
 parser.ast.ForStatementNode = ForStatementNode;
