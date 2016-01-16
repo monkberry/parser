@@ -45,10 +45,12 @@ AttributeText [^\"{]+
 %x attr
 %x regexp
 %x expr
+%x comment
 %options flex
 %%
 
 "<"                                this.begin("html"); return "<";
+"<!--"                             this.begin("comment"); return "<!--";
 "{"                                return "TEXT";
 "{{"                               this.begin("expr"); return "{{";
 "{%"                               this.begin("expr"); return "{%";
@@ -146,6 +148,9 @@ AttributeText [^\"{]+
 <expr>"~"                          return "~";
 <expr>"..."                        return "...";
 
+<comment>"-->"                     this.popState(); return "-->";
+<comment>((?!\-\-\>).)*             return "COMMENT";
+
 <<EOF>>                            return "EOF";
 
 %%
@@ -187,6 +192,10 @@ Element
     | Statement
         {
             $$ = $1;
+        }
+    | "<!--" COMMENT "-->"
+        {
+            $$ = new CommentNode($2, createSourceLocation(@1, @3));
         }
     | "<" EmptyTag AttributeList ">"
         {

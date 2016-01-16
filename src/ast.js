@@ -60,6 +60,12 @@ function TextNode(text, loc) {
   this.loc = loc;
 }
 
+function CommentNode(comment, loc) {
+  this.type = "Comment";
+  this.comment = comment;
+  this.loc = loc;
+}
+
 function ElementNode(name, attributes, body, loc) {
   this.type = "Element";
   this.name = name;
@@ -224,6 +230,7 @@ function LiteralNode(value, loc) {
 parser.ast = {};
 parser.ast.DocumentNode = DocumentNode;
 parser.ast.TextNode = TextNode;
+parser.ast.CommentNode = CommentNode;
 parser.ast.ElementNode = ElementNode;
 parser.ast.AttributeNode = AttributeNode;
 parser.ast.SpreadAttributeNode = SpreadAttributeNode;
