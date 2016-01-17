@@ -93,6 +93,12 @@ function ExpressionStatementNode(expression, loc) {
   this.loc = loc;
 }
 
+function ImportStatementNode(path, loc) {
+  this.type = 'ImportStatement';
+  this.path = path;
+  this.loc = loc;
+}
+
 function IfStatementNode(test, then, _else, loc) {
   this.type = "IfStatement";
   this.test = test;
@@ -235,6 +241,7 @@ parser.ast.ElementNode = ElementNode;
 parser.ast.AttributeNode = AttributeNode;
 parser.ast.SpreadAttributeNode = SpreadAttributeNode;
 parser.ast.ExpressionStatementNode = ExpressionStatementNode;
+parser.ast.ImportStatementNode = ImportStatementNode;
 parser.ast.IfStatementNode = IfStatementNode;
 parser.ast.ForStatementNode = ForStatementNode;
 parser.ast.FilterExpressionNode = FilterExpressionNode;

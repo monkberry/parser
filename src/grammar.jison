@@ -83,6 +83,7 @@ AttributeText [^\"{]+
 <expr>"/*"(.|\r|\n)*?"*/"          /* skip comments */
 <expr>"//".*($|\r\n|\r|\n)         /* skip comments */
 <expr>{StringLiteral}              return "STRING_LITERAL";
+<expr>"import"                     return "IMPORT";
 <expr>"if"                         return "IF";
 <expr>"else"                       return "ELSE";
 <expr>"endif"                      return "ENDIF";
@@ -244,6 +245,7 @@ EmptyTag
 
 Statement
     : ExpressionStatement
+    | ImportStatement
     | IfStatement
     | ForStatement
     ;
@@ -254,6 +256,14 @@ ExpressionStatement
         {
             $$ = new ExpressionStatementNode($2, createSourceLocation(@1, @3));
         }
+    ;
+
+
+ImportStatement
+    : "{%" IMPORT StringLiteral "%}"
+       {
+            $$ = new ImportStatementNode($3, createSourceLocation(@1, @4));
+       }
     ;
 
 
