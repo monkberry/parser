@@ -22,8 +22,7 @@
   },
   "homepage": "https://github.com/monkberry/parser#readme",
   "devDependencies": {
-    "asciitree": "^1.0.0",
-    "jison": "^0.4.15",
+    "jison": "^0.4.16",
     "preprocessor": "^1.4.0"
   }
 }

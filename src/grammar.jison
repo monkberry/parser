@@ -95,6 +95,7 @@ AttributeText [^\"{]+
 <expr>"true"                       return "TRUE";
 <expr>"false"                      return "FALSE";
 <expr>"null"                       return "NULL";
+<expr>"unsafe"                     return "UNSAFE";
 <expr>{Identifier}                 return "IDENTIFIER";
 <expr>{DecimalLiteral}             return "NUMERIC_LITERAL";
 <expr>{HexIntegerLiteral}          return "NUMERIC_LITERAL";
@@ -248,6 +249,7 @@ Statement
     | ImportStatement
     | IfStatement
     | ForStatement
+    | UnsafeStatement
     ;
 
 
@@ -291,6 +293,14 @@ ForStatement
     |  "{%" FOR IDENTIFIER "," IDENTIFIER "OF" Expression "%}" ElementList "{%" ENDFOR "%}"
         {
             $$ = new ForStatementNode($7, $9, {key: $3, value: $5}, createSourceLocation(@1, @11));
+        }
+    ;
+
+
+UnsafeStatement
+    :  "{%" UNSAFE Expression "%}"
+        {
+            $$ = new UnsafeStatementNode($3, createSourceLocation(@1, @4));
         }
     ;
 
