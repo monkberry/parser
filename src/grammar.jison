@@ -229,7 +229,7 @@ Element
             } else {
                 throw new SyntaxError(
                     "Syntax error on line " + (yylineno + 1) + ":\n" +
-                    "Tag identifiers should be same (<" + $2 + "> != </" + $7 + ">)"
+                    "Tag identifiers should be same (<" + $2 + "> != </" + $8 + ">)"
                 );
             }
         }
