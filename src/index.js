@@ -839,11 +839,11 @@ function ImportStatementNode(path, loc) {
   this.loc = loc;
 }
 
-function IfStatementNode(test, then, _else, loc) {
+function IfStatementNode(cond, then, otherwise, loc) {
   this.type = "IfStatement";
-  this.test = test;
+  this.cond = cond;
   this.then = then;
-  this._else = _else;
+  this.otherwise = otherwise;
   this.loc = loc;
 }
 
