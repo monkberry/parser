@@ -89,6 +89,8 @@ AttributeText [^\"{]+
 <expr>"endif"                      return "ENDIF";
 <expr>"for"                        return "FOR";
 <expr>"endfor"                     return "ENDFOR";
+<expr>"block"                        return "BLOCK";
+<expr>"endblock"                     return "ENDBLOCK";
 <expr>"of"                         return "OF";
 <expr>"in"                         return "IN";
 <expr>"instanceof"                 return "INSTANCEOF";
@@ -249,6 +251,7 @@ Statement
     | ImportStatement
     | IfStatement
     | ForStatement
+    | BlockStatement
     | UnsafeStatement
     ;
 
@@ -293,6 +296,14 @@ ForStatement
     |  "{%" FOR IDENTIFIER "," IDENTIFIER "OF" Expression "%}" ElementList "{%" ENDFOR "%}"
         {
             $$ = new ForStatementNode($7, $9, {key: $3, value: $5}, createSourceLocation(@1, @11));
+        }
+    ;
+
+
+BlockStatement
+    :  "{%" BLOCK StringLiteral "%}" ElementList "{%" ENDBLOCK "%}"
+        {
+            $$ = new BlockStatementNode($3, $5, createSourceLocation(@1, @8));
         }
     ;
 
