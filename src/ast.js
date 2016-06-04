@@ -1,53 +1,3 @@
-/* Helper methods */
-
-function SourceLocation(source, start, end) {
-  this.source = source;
-  this.start = start;
-  this.end = end;
-}
-
-function Position(line, column) {
-  this.line = line;
-  this.column = column;
-}
-
-function createSourceLocation(firstToken, lastToken, source) {
-  return new SourceLocation(
-    source || parser.source,
-    new Position(firstToken.first_line, firstToken.first_column),
-    new Position(lastToken.last_line, lastToken.last_column)
-  );
-}
-
-function parseRegularExpressionLiteral(literal) {
-  var last = literal.lastIndexOf("/");
-  var body = literal.substring(1, last);
-  var flags = literal.substring(last + 1);
-
-  return new RegExp(body, flags);
-}
-
-function parseNumericLiteral(literal) {
-  if (literal.charAt(0) === "0") {
-    if (literal.charAt(1).toLowerCase() === "x") {
-      return parseInt(literal, 16);
-    } else {
-      return parseInt(literal, 8);
-    }
-  } else {
-    return Number(literal);
-  }
-}
-
-/* Begin Parser Customization Methods */
-var originalParseMethod = parser.parse;
-
-parser.parse = function (code, source) {
-  parser.source = source;
-  return originalParseMethod.call(this, code);
-};
-/* End Parser Customization Methods */
-
 function DocumentNode(body, loc) {
   this.type = "Document";
   this.body = body;
@@ -246,33 +196,33 @@ function LiteralNode(value, loc) {
   this.loc = loc;
 }
 
-parser.ast = {};
-parser.ast.DocumentNode = DocumentNode;
-parser.ast.TextNode = TextNode;
-parser.ast.CommentNode = CommentNode;
-parser.ast.ElementNode = ElementNode;
-parser.ast.AttributeNode = AttributeNode;
-parser.ast.SpreadAttributeNode = SpreadAttributeNode;
-parser.ast.ExpressionStatementNode = ExpressionStatementNode;
-parser.ast.ImportStatementNode = ImportStatementNode;
-parser.ast.IfStatementNode = IfStatementNode;
-parser.ast.ForStatementNode = ForStatementNode;
-parser.ast.BlockStatementNode = BlockStatementNode;
-parser.ast.UnsafeStatementNode = UnsafeStatementNode;
-parser.ast.FilterExpressionNode = FilterExpressionNode;
-parser.ast.ThisExpressionNode = ThisExpressionNode;
-parser.ast.ArrayExpressionNode = ArrayExpressionNode;
-parser.ast.ObjectExpressionNode = ObjectExpressionNode;
-parser.ast.SequenceExpressionNode = SequenceExpressionNode;
-parser.ast.UnaryExpressionNode = UnaryExpressionNode;
-parser.ast.BinaryExpressionNode = BinaryExpressionNode;
-parser.ast.AssignmentExpressionNode = AssignmentExpressionNode;
-parser.ast.UpdateExpressionNode = UpdateExpressionNode;
-parser.ast.LogicalExpressionNode = LogicalExpressionNode;
-parser.ast.ConditionalExpressionNode = ConditionalExpressionNode;
-parser.ast.NewExpressionNode = NewExpressionNode;
-parser.ast.CallExpressionNode = CallExpressionNode;
-parser.ast.MemberExpressionNode = MemberExpressionNode;
-parser.ast.IdentifierNode = IdentifierNode;
-parser.ast.AccessorNode = AccessorNode;
-parser.ast.LiteralNode = LiteralNode;
+var ast = exports.ast = {};
+ast.DocumentNode = DocumentNode;
+ast.TextNode = TextNode;
+ast.CommentNode = CommentNode;
+ast.ElementNode = ElementNode;
+ast.AttributeNode = AttributeNode;
+ast.SpreadAttributeNode = SpreadAttributeNode;
+ast.ExpressionStatementNode = ExpressionStatementNode;
+ast.ImportStatementNode = ImportStatementNode;
+ast.IfStatementNode = IfStatementNode;
+ast.ForStatementNode = ForStatementNode;
+ast.BlockStatementNode = BlockStatementNode;
+ast.UnsafeStatementNode = UnsafeStatementNode;
+ast.FilterExpressionNode = FilterExpressionNode;
+ast.ThisExpressionNode = ThisExpressionNode;
+ast.ArrayExpressionNode = ArrayExpressionNode;
+ast.ObjectExpressionNode = ObjectExpressionNode;
+ast.SequenceExpressionNode = SequenceExpressionNode;
+ast.UnaryExpressionNode = UnaryExpressionNode;
+ast.BinaryExpressionNode = BinaryExpressionNode;
+ast.AssignmentExpressionNode = AssignmentExpressionNode;
+ast.UpdateExpressionNode = UpdateExpressionNode;
+ast.LogicalExpressionNode = LogicalExpressionNode;
+ast.ConditionalExpressionNode = ConditionalExpressionNode;
+ast.NewExpressionNode = NewExpressionNode;
+ast.CallExpressionNode = CallExpressionNode;
+ast.MemberExpressionNode = MemberExpressionNode;
+ast.IdentifierNode = IdentifierNode;
+ast.AccessorNode = AccessorNode;
+ast.LiteralNode = LiteralNode;

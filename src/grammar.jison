@@ -939,4 +939,5 @@ ReservedWord
 
 %%
 
+// #include "helpers.js"
 // #include "ast.js"
