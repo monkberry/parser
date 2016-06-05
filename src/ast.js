@@ -65,13 +65,6 @@ function ForStatementNode(expr, body, options, loc) {
   this.loc = loc;
 }
 
-function BlockStatementNode(name, body, loc) {
-  this.type = "BlockStatement";
-  this.name = name;
-  this.body = body;
-  this.loc = loc;
-}
-
 function UnsafeStatementNode(html, loc) {
   this.type = "UnsafeStatement";
   this.html = html;
@@ -207,7 +200,6 @@ ast.ExpressionStatementNode = ExpressionStatementNode;
 ast.ImportStatementNode = ImportStatementNode;
 ast.IfStatementNode = IfStatementNode;
 ast.ForStatementNode = ForStatementNode;
-ast.BlockStatementNode = BlockStatementNode;
 ast.UnsafeStatementNode = UnsafeStatementNode;
 ast.FilterExpressionNode = FilterExpressionNode;
 ast.ThisExpressionNode = ThisExpressionNode;
