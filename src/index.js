@@ -780,7 +780,7 @@ function parseNumericLiteral(literal) {
 /* Begin Parser Customization Methods */
 var originalParseMethod = parser.parse;
 
-parser.parse = function (code, source) {
+parser.parse = function (source, code) {
   parser.source = source;
   return originalParseMethod.call(this, code);
 };
