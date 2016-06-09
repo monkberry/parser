@@ -43,8 +43,9 @@ function ExpressionStatementNode(expression, loc) {
   this.loc = loc;
 }
 
-function ImportStatementNode(path, loc) {
+function ImportStatementNode(identifier, path, loc) {
   this.type = 'ImportStatement';
+  this.identifier = identifier;
   this.path = path;
   this.loc = loc;
 }

@@ -84,6 +84,7 @@ AttributeText [^\"{]+
 <expr>"//".*($|\r\n|\r|\n)         /* skip comments */
 <expr>{StringLiteral}              return "STRING_LITERAL";
 <expr>"import"                     return "IMPORT";
+<expr>"from"                       return "FROM";
 <expr>"if"                         return "IF";
 <expr>"else"                       return "ELSE";
 <expr>"endif"                      return "ENDIF";
@@ -151,7 +152,7 @@ AttributeText [^\"{]+
 <expr>"..."                        return "...";
 
 <comment>"-->"                     this.popState(); return "-->";
-<comment>((?!\-\-\>).)*             return "COMMENT";
+<comment>((?!\-\-\>).)*            return "COMMENT";
 
 <<EOF>>                            return "EOF";
 
@@ -262,9 +263,9 @@ ExpressionStatement
 
 
 ImportStatement
-    : "{%" IMPORT StringLiteral "%}"
+    : "{%" IMPORT IdentifierName FROM StringLiteral "%}"
        {
-            $$ = new ImportStatementNode($3, createSourceLocation(@1, @4));
+            $$ = new ImportStatementNode($3, $5, createSourceLocation(@1, @4));
        }
     ;
 
